@@ -34,10 +34,19 @@ int main(int argc, char *argv[])
 
   PID pid;
   // TODO: Initialize the pid variable.
-  double init_kp = atof(argv[1]);
-  double init_ki = atof(argv[2]);
-  double init_kd = atof(argv[3]);
-  
+  if (argc > 1)
+  {
+      double init_kp = atof(argv[1]);
+      double init_ki = atof(argv[2]);
+      double init_kd = atof(argv[3]);	  
+  }
+  else
+  {
+      double init_kp = 0.09;
+      double init_ki = 0.0005;
+      double init_kd = 1.7;	  
+  }
+
   pid.Init(init_kp, init_ki, init_kd);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
